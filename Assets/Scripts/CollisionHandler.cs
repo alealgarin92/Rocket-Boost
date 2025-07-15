@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float levelLoadDelay = 2f;
+    
     private void OnCollisionEnter(Collision collision)
     {
         switch (collision.gameObject.tag)
@@ -10,14 +14,42 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("Esta todo tranquilo");
                 break;
             case "Finish":
-                Debug.Log("Llegaste a la meta");
+                StartSecessSecuence();
                 break;
             case "Fuel":
                 Debug.Log("Es combustible");
-                break;
+                break;    
             default:
-                Debug.Log("Estas chocando amigo");
+                StartCrashSecuence();
                 break;
         }
+    }
+
+    private void StartSecessSecuence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("LoadNextLevel", levelLoadDelay);
+    }
+
+    void StartCrashSecuence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("ReloadLevel", levelLoadDelay);
+    }
+
+    void ReloadLevel()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene);
+    }
+
+    void LoadNextLevel()
+    {
+        int nextLevel = SceneManager.GetActiveScene().buildIndex+1;
+        if (nextLevel == SceneManager.sceneCountInBuildSettings)
+        {
+            nextLevel = 0;
+        }
+        SceneManager.LoadScene(nextLevel);
     }
 }
