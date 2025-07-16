@@ -5,16 +5,29 @@ using UnityEngine.SceneManagement;
 public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float levelLoadDelay = 2f;
-    
+    [SerializeField] AudioClip success;
+    [SerializeField] AudioClip deathExplosion;
+
+    AudioSource audioSource;
+
+    bool isControllable = true;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isControllable) { return; }
+
         switch (collision.gameObject.tag)
         {
             case "Friendly":
                 Debug.Log("Esta todo tranquilo");
                 break;
             case "Finish":
-                StartSecessSecuence();
+                StartSuccessSecuence();
                 break;
             case "Fuel":
                 Debug.Log("Es combustible");
@@ -25,14 +38,20 @@ public class CollisionHandler : MonoBehaviour
         }
     }
 
-    private void StartSecessSecuence()
+    private void StartSuccessSecuence()
     {
+        isControllable = false;
+        audioSource.Stop();
+        audioSource.PlayOneShot(success);
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", levelLoadDelay);
     }
 
     void StartCrashSecuence()
     {
+        isControllable = false;
+        audioSource.Stop();
+        audioSource.PlayOneShot(deathExplosion);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", levelLoadDelay);
     }
