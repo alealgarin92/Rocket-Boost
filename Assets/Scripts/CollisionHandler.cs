@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
@@ -9,6 +10,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip deathExplosionSFX;
     [SerializeField] ParticleSystem succesParticles;
     [SerializeField] ParticleSystem crashParticles;
+    [SerializeField] InputAction nextLevel;
 
     AudioSource audioSource;
 
@@ -17,6 +19,16 @@ public class CollisionHandler : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        nextLevel.Enable();
+    }
+
+    private void Update()
+    {
+        RespondToDebugKeys();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -76,5 +88,13 @@ public class CollisionHandler : MonoBehaviour
             nextLevel = 0;
         }
         SceneManager.LoadScene(nextLevel);
+    }
+
+    void RespondToDebugKeys()
+    {
+        if(nextLevel.IsPressed() == true)
+        {
+            LoadNextLevel();
+        }
     }
 }
