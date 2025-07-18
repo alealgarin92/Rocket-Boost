@@ -315,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.500001, y: 1.3199999, z: -10}
+  m_LocalPosition: {x: -9.5, y: 1.298, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -698,7 +698,7 @@ Transform:
   m_GameObject: {fileID: 1890230686}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.500001, y: 1.3199999, z: -10}
+  m_LocalPosition: {x: -9.5, y: 1.298, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -813,13 +813,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Rocket
       objectReference: {fileID: 0}
+    - target: {fileID: 3665300126225541297, guid: af829a80acba01a4eb7c373bd13d4a59, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665300126225541297, guid: af829a80acba01a4eb7c373bd13d4a59, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4817585783946753975, guid: af829a80acba01a4eb7c373bd13d4a59, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.5
       objectReference: {fileID: 0}
     - target: {fileID: 4817585783946753975, guid: af829a80acba01a4eb7c373bd13d4a59, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.73
+      value: 0.708
       objectReference: {fileID: 0}
     - target: {fileID: 4817585783946753975, guid: af829a80acba01a4eb7c373bd13d4a59, type: 3}
       propertyPath: m_LocalPosition.z
